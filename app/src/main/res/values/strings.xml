@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Open link</string>
+    <string name="ip_address">192.168.1.106</string>
+    <string name="port_number">1007</string>
+    <string name="port">Port</string>
+    <string name="save_preference_button">Save preferences</string>
+    <string name="load_preference_button">Load preferences</string>
+    <string name="play_pause">> / II</string>
+    <string name="rewind">-10</string>
+    <string name="forward">+10</string>
+    <string name="volume_up">+</string>
+    <string name="volume_down">-</string>
+    <string name="open_link">Open link</string>
+    <string name="ip">IP</string>
+    <string name="volume">Volume</string>
+</resources>
