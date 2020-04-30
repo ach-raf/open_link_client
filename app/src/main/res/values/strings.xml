@@ -13,4 +13,11 @@
     <string name="open_link">Open link</string>
     <string name="ip">IP</string>
     <string name="volume">Volume</string>
+    <string name="connected">connected</string>
+    <string name="subtitle">S</string>
+    <string name="audio">Audio</string>
+    <string name="off">OFF</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="bluetooth_off">OFF</string>
+    <string name="bluetooth_on">ON</string>
 </resources>

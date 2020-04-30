@@ -8,12 +8,26 @@
 
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/audio_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="@string/audio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.667"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314" />
+
     <TextView
         android:id="@+id/txt_url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="380dp"
-        android:text="connected"
+        android:text="@string/connected"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,47 +48,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txt_port"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="@string/port_number"
-        app:layout_constraintBottom_toTopOf="@+id/txt_url"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ip"
-        app:layout_constraintVertical_bias="0.031" />
-
     <Button
         android:id="@+id/save_prefs_button"
         android:layout_width="132dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
-        android:onClick="save_preferences"
+        android:onClick="savePreferences"
         android:text="@string/save_preference_button"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.451"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231" />
+        app:layout_constraintVertical_bias="0.138" />
 
     <Button
         android:id="@+id/subtitle_button"
-        android:layout_width="88dp"
+        android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
-        android:text="Subtitle"
+        android:onClick="getCommand"
+        android:text="@string/subtitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.691"
+        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316" />
+        app:layout_constraintVertical_bias="0.314" />
 
     <Button
         android:id="@+id/skip_forward_button"
@@ -82,7 +83,7 @@
         android:layout_height="44dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/ic_skip_forward"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +97,7 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:text="@string/rewind"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -111,7 +112,7 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@drawable/ic_stop"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         app:layout_constraintBottom_toTopOf="@+id/txt_link"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -124,7 +125,7 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@drawable/ic_backward"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.164"
@@ -137,7 +138,7 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:text="@string/forward"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -152,7 +153,7 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@drawable/ic_previous"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +167,7 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@drawable/ic_fast_forward"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.848"
@@ -179,7 +180,7 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@drawable/ic_play"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -192,30 +193,30 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:text="@string/volume_up"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintHorizontal_bias="0.389"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316" />
+        app:layout_constraintVertical_bias="0.314" />
 
     <Button
         android:id="@+id/volume_reduce_button"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:text="@string/volume_down"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316" />
+        app:layout_constraintVertical_bias="0.314" />
 
     <TextView
         android:id="@+id/label_ip"
@@ -224,25 +225,10 @@
         android:layout_marginTop="56dp"
         android:text="@string/ip"
         android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toTopOf="@+id/label_port"
         app:layout_constraintEnd_toStartOf="@+id/txt_ip"
         app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.069" />
-
-    <TextView
-        android:id="@+id/label_port"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/port"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/label_volume"
@@ -277,12 +263,51 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="440dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="open_external_link"
+        android:onClick="openExternalLink"
         android:text="@string/open_link"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txt_link"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/bluetooth_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textOff="@string/bluetooth_off"
+        android:textOn="@string/bluetooth_on"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.227" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bluetooth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.235" />
+
+    <Button
+        android:id="@+id/btn_turn_off_screen"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@android:drawable/ic_delete"
+        android:onClick="getCommand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
