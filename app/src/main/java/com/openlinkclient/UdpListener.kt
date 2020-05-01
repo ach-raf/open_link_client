@@ -1,4 +1,4 @@
-package com.barakamntmkrib
+package com.openlinkclient
 
 import android.annotation.SuppressLint
 import android.util.Log

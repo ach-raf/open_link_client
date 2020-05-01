@@ -1,4 +1,4 @@
-package com.barakamntmkrib
+package com.openlinkclient
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
@@ -18,7 +18,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.barakamntmkrib.UdpListener.TextFromRunnable
+import com.openlinkclient.UdpListener.TextFromRunnable
 import java.io.IOException
 import java.io.PrintWriter
 import java.net.Socket

@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.barakamntmkrib"
+        applicationId "com.openlinkclient"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1

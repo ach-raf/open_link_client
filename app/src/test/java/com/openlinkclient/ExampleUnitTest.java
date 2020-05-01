@@ -1,4 +1,4 @@
-package com.barakamntmkrib;
+package com.openlinkclient;
 
 import org.junit.Test;
 
