@@ -3,11 +3,11 @@ package com.barakamntmkrib
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.content.*
-import android.content.SharedPreferences.Editor
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.util.Log
+import android.view.ContextMenu
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
@@ -25,24 +25,22 @@ import java.net.Socket
 import java.net.UnknownHostException
 
 class MainActivity : AppCompatActivity() {
-    private var txt_url: TextView? = null
-    private var txt_ip: EditText? = null
-    private val PORT_NUMBER = 1007
-    private var txt_link: EditText? = null
-    private var host: String? = null
-    private val port = 0
-    private var socket: Socket? = null
-    private var printwriter: PrintWriter? = null
-    private val connection = false
-    private var pref: SharedPreferences? = null
-    private val editor: Editor? = null
-
+    private var txtServerStatus: TextView? = null
+    private var txtIp: EditText? = null
+    private var txtLink: EditText? = null
     private var switchBluetooth: Switch? = null
+
+    private var socket: Socket? = null
+    private var host: String? = null
+    private val port = 1007
+    //to implement: detect if the server is connected or not,
+    // also timeout udp listener
+    private var connection = false
 
     // This is the activity main thread Handler.
     private var updateUIHandler: Handler? = null
-    private val BLUETOOTH_ON = "bluetooth_on"
-    private val BLUETOOTH_OFF = "bluetooth_off"
+    private val bluetoothOn = "bluetooth_on"
+    private val bluetoothOff = "bluetooth_off"
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,54 +50,48 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize Handler.
         createUpdateUiHandler()
-
-        // Register for broadcasts on BluetoothAdapter state change
-        val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
-        registerReceiver(mReceiver, filter)
-
-
         //
-        txt_url = findViewById(R.id.txt_url)
-        txt_ip = findViewById(R.id.txt_ip)
-        switchBluetooth = findViewById(R.id.bluetooth_switch)
-        registerForContextMenu(txt_url)
-
-        txt_link = findViewById(R.id.txt_link)
-        //The listener of a drawableEnd button to clear a TextInputEditText
-        txt_link?.setOnTouchListener(clearTextInputDrawableOnTouchListner())
-
         getServerAddress()
 
-
-        // logic to call shared preferences
-        /*if (getSharedPreferences(CONNECTION_PREFS, Context.MODE_PRIVATE).contains("ip_address")
-                && getSharedPreferences(CONNECTION_PREFS, Context.MODE_PRIVATE).contains("port_number")) {
-            loadPreferences()
-        }*/
-
-        // Get intent, action and MIME type
+        // Get link from the share menu
         val intent = intent
         val action = intent.action
         val type = intent.type
         if (Intent.ACTION_SEND == action && type != null) {
             sharedTextHandler(intent) // Handle text being sent
-            /*if ("text/plain".equals(type)) {
-
-            }*/
         }
+
+        // Register for broadcasts on BluetoothAdapter state change
+        val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
+        registerReceiver(mReceiver, filter)
+
+        //
+        txtServerStatus = findViewById(R.id.txt_server_status)
+        // Override onCreateContextMenu to change behavior
+        registerForContextMenu(txtServerStatus)
+
+        txtIp = findViewById(R.id.txt_ip)
+        switchBluetooth = findViewById(R.id.bluetooth_switch)
+
+        txtLink = findViewById(R.id.txt_link)
+        //calling the listener of a drawableEnd button to clear a TextInputEditText
+        txtLink?.setOnTouchListener(clearTextInputDrawableOnTouchListener())
+
+
 
         switchBluetooth?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // The toggle is enabled
-                sendCommand(BLUETOOTH_ON)
+                sendCommand(bluetoothOn)
             } else {
                 // The toggle is disabled
-                sendCommand(BLUETOOTH_OFF)
+                sendCommand(bluetoothOff)
             }
         }
     }
 
-    private fun clearTextInputDrawableOnTouchListner(): OnTouchListener? {
+    private fun clearTextInputDrawableOnTouchListener(): OnTouchListener? {
+        //The listener of a drawableEnd button to clear a TextInputEditText
         return OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 val textView = v as EditText
@@ -150,26 +142,26 @@ class MainActivity : AppCompatActivity() {
         sendCommand(command)
     }
 
-    fun sendCommand(command: String?) {
-        host = txt_ip?.text.toString()
-        openLink(command, host, PORT_NUMBER)
+    fun sendCommand(command: String) {
+        host = txtIp?.text.toString()
+        openLink(command, host)
     }
 
     private fun sharedTextHandler(intent: Intent) {
-        host = txt_ip!!.text.toString()
+        host = txtIp!!.text.toString()
         val sharedText = intent.getStringExtra(Intent.EXTRA_TEXT)
         if (sharedText != null) {
             // Update UI to reflect text being shared
-            txt_url!!.text = sharedText
-            openLink(sharedText, host, PORT_NUMBER)
+            txtServerStatus!!.text = sharedText
+            openLink(sharedText, host)
         } else {
             val error = "Error getting the link"
-            txt_url!!.text = error
+            txtServerStatus!!.text = error
         }
     }
 
     fun updateIpValue(ipAddress: String?) {
-        txt_ip!!.setText(ipAddress)
+        txtIp!!.setText(ipAddress)
     }
 
     @Throws(InterruptedException::class)
@@ -191,59 +183,26 @@ class MainActivity : AppCompatActivity() {
         udpClient.join()
     }
 
-    @Throws(InterruptedException::class)
-    fun savePreferences(view: View?) {
-        /*editor = getSharedPreferences(CONNECTION_PREFS, MODE_PRIVATE).edit();
-        editor.putString("ip_address", txt_ip.getText().toString());
-        editor.putInt("port_number", Integer.parseInt(txt_port.getText().toString()));
-        editor.apply();*/
 
+    fun openExternalLink(v: View) {
+        host = txtIp!!.text.toString()
+        val url = txtLink!!.text.toString()
+        txtServerStatus!!.text = url
+        openLink(url, host)
     }
 
-    private fun loadPreferences() {
-        var ip: String? = "192.168.1.106"  //"No ip defined" is the default value.
-        try {
-            ip = pref!!.getString("ip_address", "192.168.1.106")
-        } catch (e: Exception) {
-        }
-        txt_ip!!.setText(ip)
-        //int port = pref.getInt("port_number", 1007); //1007 is the default port.
-        //txt_port.setText(String.valueOf(port));
-    }
 
-    fun openExternalLink() {
-        host = txt_ip!!.text.toString()
-        val url = txt_link!!.text.toString()
-        txt_url!!.text = url
-        openLink(url, host, PORT_NUMBER)
-    }
 
-    /*override fun onCreateContextMenu(menu: ContextMenu, view: View,
-                                     menuInfo: ContextMenu.ContextMenuInfo) {
-        // user has long pressed your TextView
-        menu.add(0, view.id, 0,
-                "Copy")
-
-        // cast the received View to TextView so that you can get its text
-        val yourTextView = view as TextView
-
-        // place your TextView's text in clipboard
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clipData = ClipData
-                .newPlainText("last link", yourTextView.text)
-        clipboard.primaryClip = clipData
-    }*/
-
-    private fun openLink(command: String?, host: String?, port: Int) {
+    private fun openLink(command: String, host: String?) {
         Thread(Runnable {
             try {
-
+                var printwriter: PrintWriter? = null
                 //System.out.println("Your current Hostname : " + host);
                 socket = Socket(host, port)
                 printwriter = PrintWriter(socket!!.getOutputStream(), true)
-                printwriter!!.write(command) // write the message to output stream
-                printwriter!!.flush()
-                printwriter!!.close()
+                printwriter.write(command) // write the message to output stream
+                printwriter.flush()
+                printwriter.close()
                 Log.d("socket", "connected")
 
 
@@ -283,14 +242,29 @@ class MainActivity : AppCompatActivity() {
         private fun bluetoothStateChange(bluetooth_state: String) {
             if (bluetooth_state == "STATE_TURNING_OFF") {
                 // when the state is off turn bluetooth on on computer
-                sendCommand(BLUETOOTH_ON)
+                sendCommand(bluetoothOn)
 
             } else if (bluetooth_state == "STATE_TURNING_ON") {
                 // to disconnect the bluetooth on the computer
-                sendCommand(BLUETOOTH_OFF)
+                sendCommand(bluetoothOff)
 
             }
         }
+    }
+    override fun onCreateContextMenu(menu: ContextMenu, view: View,
+                                     menuInfo: ContextMenu.ContextMenuInfo) {
+        // user has long pressed your TextView
+        menu.add(0, view.id, 0,
+                "Copy")
+
+        // cast the received View to TextView so that you can get its text
+        val yourTextView = view as TextView
+
+        // place your TextView's text in clipboard
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData
+                .newPlainText("last link", yourTextView.text)
+        clipboard.primaryClip = clipData
     }
 
     public override fun onDestroy() {
@@ -303,8 +277,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val CONNECTION_PREFS = "connection"
-
         // Message type code.
         private const val MESSAGE_UPDATE_TEXT_CHILD_THREAD = 1
     }
