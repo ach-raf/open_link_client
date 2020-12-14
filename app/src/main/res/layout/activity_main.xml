@@ -17,7 +17,7 @@
         android:text="@string/audio"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.667"
+        app:layout_constraintHorizontal_bias="0.822"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.314" />
@@ -64,6 +64,20 @@
         app:layout_constraintVertical_bias="0.314" />
 
     <Button
+        android:id="@+id/subtitle_search"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="@string/subtitle_search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314" />
+
+    <Button
         android:id="@+id/skip_forward_button"
         android:layout_width="44dp"
         android:layout_height="44dp"
@@ -73,22 +87,37 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintHorizontal_bias="0.816"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.465" />
 
     <Button
-        android:id="@+id/rewind_button"
+        android:id="@+id/minus_10_seconds"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
         android:onClick="getCommand"
-        android:text="@string/rewind"
+        android:text="@string/minus_10_seconds"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.392" />
+
+    <Button
+        android:id="@+id/minus_20_seconds"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="@string/minus_20_seconds"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.392" />
@@ -101,7 +130,6 @@
         android:onClick="getCommand"
         app:layout_constraintBottom_toTopOf="@+id/txt_link"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.818" />
@@ -114,18 +142,46 @@
         android:onClick="getCommand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.465" />
+
+    <Button
+        android:id="@+id/plus_20_seconds"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="@string/plus_20_seconds"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.825"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.392" />
 
     <Button
-        android:id="@+id/forward_button"
+        android:id="@+id/next_chapter_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_fast_forward"
+        android:onClick="getCommand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.465" />
+
+    <Button
+        android:id="@+id/plus_10_seconds"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
         android:onClick="getCommand"
-        android:text="@string/forward"
+        android:text="@string/plus_10_seconds"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -143,23 +199,10 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.465" />
-
-    <Button
-        android:id="@+id/next_chapter_button"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@drawable/ic_fast_forward"
-        android:onClick="getCommand"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.848"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392" />
 
     <Button
         android:id="@+id/play_pause_button"
@@ -169,7 +212,6 @@
         android:onClick="getCommand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.392" />
@@ -273,6 +315,7 @@
         android:id="@+id/bluetooth_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checked="true"
         android:text=""
         android:textOff="@string/bluetooth_off"
         android:textOn="@string/bluetooth_on"
@@ -295,5 +338,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_bluetooth"
+        android:layout_width="62dp"
+        android:layout_height="46dp"
+        android:onClick="bluetoothButton"
+        android:text="ON"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.595" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

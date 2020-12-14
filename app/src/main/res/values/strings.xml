@@ -6,8 +6,10 @@
     <string name="save_preference_button">Save preferences</string>
     <string name="load_preference_button">Load preferences</string>
     <string name="play_pause">> / II</string>
-    <string name="rewind">-10</string>
-    <string name="forward">+10</string>
+    <string name="minus_10_seconds">-10</string>
+    <string name="plus_10_seconds">+10</string>
+    <string name="minus_20_seconds">-20</string>
+    <string name="plus_20_seconds">+20</string>
     <string name="volume_up">+</string>
     <string name="volume_down">-</string>
     <string name="open_link">Open link</string>
@@ -15,9 +17,19 @@
     <string name="volume">Volume</string>
     <string name="connected">connected</string>
     <string name="subtitle">S</string>
+    <string name="subtitle_search">D</string>
     <string name="audio">Audio</string>
     <string name="off">OFF</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_off">OFF</string>
     <string name="bluetooth_on">ON</string>
+    <string name="go">Go</string>
+
+    <string-array name="remote_controllers_list">
+        <item>MPC</item>
+        <item>Netflix</item>
+        <item>Emby</item>
+    </string-array>
+
+
 </resources>

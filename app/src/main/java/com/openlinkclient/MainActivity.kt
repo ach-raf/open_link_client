@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private var socket: Socket? = null
     private var host: String? = null
     private val port = 1007
+
     //to implement: detect if the server is connected or not,
     // also timeout udp listener
     private var connection = false
@@ -42,24 +43,23 @@ class MainActivity : AppCompatActivity() {
     private val bluetoothOn = "bluetooth_on"
     private val bluetoothOff = "bluetooth_off"
 
+    private var bluetoothBtnClickedCounter: Int = 0
+
+    private lateinit var pref: SharedPreferences
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) //For night mode theme
         setContentView(R.layout.activity_main)
 
+        pref = getSharedPreferences("preferences", Context.MODE_PRIVATE)
+
+
         // Initialize Handler.
         createUpdateUiHandler()
         //
         getServerAddress()
-
-        // Get link from the share menu
-        val intent = intent
-        val action = intent.action
-        val type = intent.type
-        if (Intent.ACTION_SEND == action && type != null) {
-            sharedTextHandler(intent) // Handle text being sent
-        }
 
         // Register for broadcasts on BluetoothAdapter state change
         val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
@@ -88,6 +88,14 @@ class MainActivity : AppCompatActivity() {
                 sendCommand(bluetoothOff)
             }
         }
+
+        // Get link from the share menu
+        val intent = intent
+        val action = intent.action
+        val type = intent.type
+        if (Intent.ACTION_SEND == action && type != null) {
+            sharedTextHandler(intent) // Handle text being sent
+        }
     }
 
     private fun clearTextInputDrawableOnTouchListener(): OnTouchListener? {
@@ -115,7 +123,11 @@ class MainActivity : AppCompatActivity() {
                     // Means the message is sent from child thread.
                     if (msg.what == MESSAGE_UPDATE_TEXT_CHILD_THREAD) {
                         // Update ui in main thread.
+
                         updateIpValue(msg.obj.toString())
+                        val editor = pref.edit()
+                        editor.putString("host", msg.obj.toString())
+                        editor.apply()
                     }
                 }
             }
@@ -126,10 +138,13 @@ class MainActivity : AppCompatActivity() {
         val command: String = when (view.id) {
             R.id.volume_reduce_button -> "volume down"
             R.id.volume_increase_button -> "volume up"
-            R.id.rewind_button -> "left arrow"
+            R.id.minus_10_seconds -> "left arrow"
+            R.id.plus_10_seconds -> "right arrow"
+            R.id.minus_20_seconds -> "alt+left arrow"
+            R.id.plus_20_seconds -> "alt+right arrow"
             R.id.play_pause_button -> "space"
-            R.id.forward_button -> "right arrow"
             R.id.subtitle_button -> "s"
+            R.id.subtitle_search -> "d"
             R.id.audio_button -> "a"
             R.id.stop_button -> ";"
             R.id.next_chapter_button -> "page down"
@@ -137,28 +152,46 @@ class MainActivity : AppCompatActivity() {
             R.id.skip_forward_button -> "ctrl+page down"
             R.id.skip_back_button -> "ctrl+page up"
             R.id.btn_turn_off_screen -> "turn_off_screen"
+            R.id.btn_bluetooth -> "turn_off_screen"
             else -> throw IllegalStateException("Unexpected value: " + view.id)
         }
         sendCommand(command)
     }
 
+    fun bluetoothButton(view: View) {
+        if (bluetoothBtnClickedCounter % 2 == 0) {
+            sendCommand(bluetoothOn)
+        } else {
+            sendCommand(bluetoothOff)
+        }
+        bluetoothBtnClickedCounter++
+    }
+
     fun sendCommand(command: String) {
         host = txtIp?.text.toString()
         openLink(command, host)
+
+        /*val tcpServer = TcpServer()
+        tcpServer.openLink(this, command, host)*/
     }
 
     private fun sharedTextHandler(intent: Intent) {
-        host = txtIp!!.text.toString()
-        val sharedText = intent.getStringExtra(Intent.EXTRA_TEXT)
-        if (sharedText != null) {
-            // Update UI to reflect text being shared
-            txtServerStatus!!.text = sharedText
-            openLink(sharedText, host)
-        } else {
-            val error = "Error getting the link"
-            txtServerStatus!!.text = error
-        }
+        host = pref.getString("host", "192.168.11.111") //txtIp?.text.toString()
+        val sharedText = intent.getStringExtra(Intent.EXTRA_TEXT).toString()
+        // Update UI to reflect text being shared
+        //txtServerStatus!!.text = sharedText
+        //txtLink!!.setText(sharedText)
+        Toast.makeText(this, host, Toast.LENGTH_SHORT).show()
+        openLink(sharedText, host)
+
+        // there is an error when I try to change the value of any edit text
+        updateLinkValue(sharedText)
     }
+
+    fun updateLinkValue(_link: String?) {
+        txtLink!!.setText(_link)
+    }
+
 
     fun updateIpValue(ipAddress: String?) {
         txtIp!!.setText(ipAddress)
@@ -192,28 +225,27 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun openLink(command: String, host: String?) {
         Thread(Runnable {
             try {
-                var printwriter: PrintWriter? = null
                 //System.out.println("Your current Hostname : " + host);
                 socket = Socket(host, port)
-                printwriter = PrintWriter(socket!!.getOutputStream(), true)
+                val printwriter = PrintWriter(socket!!.getOutputStream(), true)
                 printwriter.write(command) // write the message to output stream
                 printwriter.flush()
                 printwriter.close()
                 Log.d("socket", "connected")
 
 
-                // Toast in background because Toast cannot be in main thread you have to create runOnuithread.
+                // Toast in background because Toast cannot be in main thread you have to create
+                // runOnUiThread.
                 // this is run on ui thread where dialogs and all other GUI will run.
                 if (socket!!.isConnected) {
                     runOnUiThread { Toast.makeText(applicationContext, "Command sent", Toast.LENGTH_SHORT).show() }
                 }
             } catch (e2: UnknownHostException) {
                 runOnUiThread { //Do your UI operations like dialog opening or Toast here
-                    Toast.makeText(applicationContext, "Unknown host please make sure IP address", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Unknown host please make sure IP address is correct", Toast.LENGTH_SHORT).show()
                 }
             } catch (e1: IOException) {
                 Log.d("socket", "IOException")
@@ -251,6 +283,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onCreateContextMenu(menu: ContextMenu, view: View,
                                      menuInfo: ContextMenu.ContextMenuInfo) {
         // user has long pressed your TextView
@@ -279,5 +312,9 @@ class MainActivity : AppCompatActivity() {
     companion object {
         // Message type code.
         private const val MESSAGE_UPDATE_TEXT_CHILD_THREAD = 1
+    }
+
+    fun showToast(toast: String?) {
+        runOnUiThread { Toast.makeText(applicationContext, toast, Toast.LENGTH_SHORT).show() }
     }
 }
