@@ -1,2 +1,2 @@
 # open_link_client
-an android app for tcp udp testing.
+an android app for tcp udp learning.

@@ -6,75 +6,90 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
 
-    tools:context=".MainActivity">
+    tools:context="com.openlinkclient.MainActivity">
+
+    <Button
+        android:id="@+id/audio_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="@string/audio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.749"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314" />
+
 
     <TextView
-        android:id="@+id/txt_url"
+        android:id="@+id/txt_server_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="380dp"
-        android:text="connected"
+        android:text="Offline"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.891" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_link"
+        app:layout_constraintVertical_bias="0.764" />
 
     <EditText
         android:id="@+id/txt_ip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txt_port"
+    <TextView
+        android:id="@+id/label_ip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="@string/port_number"
-        app:layout_constraintBottom_toTopOf="@+id/txt_url"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        android:text="@string/ip"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/txt_ip"
+        app:layout_constraintHorizontal_bias="0.789"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ip"
-        app:layout_constraintVertical_bias="0.031" />
-
-    <Button
-        android:id="@+id/save_prefs_button"
-        android:layout_width="132dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="save_preferences"
-        android:text="@string/save_preference_button"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/subtitle_button"
-        android:layout_width="88dp"
+        android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
-        android:text="Subtitle"
+        android:onClick="getCommand"
+        android:text="@string/subtitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.691"
+        app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316" />
+        app:layout_constraintVertical_bias="0.314" />
+
+    <Button
+        android:id="@+id/subtitle_search"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="@string/subtitle_search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314" />
 
     <Button
         android:id="@+id/skip_forward_button"
@@ -82,22 +97,22 @@
         android:layout_height="44dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/ic_skip_forward"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintHorizontal_bias="0.816"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.465" />
 
     <Button
-        android:id="@+id/rewind_button"
+        android:id="@+id/minus_10_seconds"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
-        android:text="@string/rewind"
+        android:onClick="getCommand"
+        android:text="@string/minus_10_seconds"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,24 +122,13 @@
         app:layout_constraintVertical_bias="0.392" />
 
     <Button
-        android:id="@+id/stop_button"
+        android:id="@+id/minus_20_seconds"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:background="@drawable/ic_stop"
-        android:onClick="send_command"
-        app:layout_constraintBottom_toTopOf="@+id/txt_link"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818" />
-
-    <Button
-        android:id="@+id/previous_chapter_button"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@drawable/ic_backward"
-        android:onClick="send_command"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="@string/minus_20_seconds"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.164"
@@ -133,12 +137,66 @@
         app:layout_constraintVertical_bias="0.392" />
 
     <Button
-        android:id="@+id/forward_button"
+        android:id="@+id/stop_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_stop"
+        android:onClick="getCommand"
+        app:layout_constraintBottom_toTopOf="@+id/txt_link"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/play_pause_button"
+        app:layout_constraintVertical_bias="0.301" />
+
+    <Button
+        android:id="@+id/previous_chapter_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_backward"
+        android:onClick="getCommand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.465" />
+
+    <Button
+        android:id="@+id/plus_20_seconds"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
-        android:text="@string/forward"
+        android:onClick="getCommand"
+        android:text="@string/plus_20_seconds"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.392" />
+
+    <Button
+        android:id="@+id/next_chapter_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_fast_forward"
+        android:onClick="getCommand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.465" />
+
+    <Button
+        android:id="@+id/plus_10_seconds"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="@string/plus_10_seconds"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,97 +210,57 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@drawable/ic_previous"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.465" />
-
-    <Button
-        android:id="@+id/next_chapter_button"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@drawable/ic_fast_forward"
-        android:onClick="send_command"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.848"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392" />
 
     <Button
         android:id="@+id/play_pause_button"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@drawable/ic_play"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392" />
+        app:layout_constraintTop_toBottomOf="@+id/subtitle_button"
+        app:layout_constraintVertical_bias="0.037" />
 
     <Button
         android:id="@+id/volume_increase_button"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:text="@string/volume_up"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316" />
+        app:layout_constraintVertical_bias="0.238" />
 
     <Button
         android:id="@+id/volume_reduce_button"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="send_command"
+        android:onClick="getCommand"
         android:text="@string/volume_down"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316" />
-
-    <TextView
-        android:id="@+id/label_ip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="@string/ip"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toTopOf="@+id/label_port"
-        app:layout_constraintEnd_toStartOf="@+id/txt_ip"
-        app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.069" />
-
-    <TextView
-        android:id="@+id/label_port"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/port"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintVertical_bias="0.314" />
 
     <TextView
         android:id="@+id/label_volume"
@@ -253,36 +271,110 @@
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintVertical_bias="0.163" />
 
     <EditText
         android:id="@+id/txt_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="264dp"
+        android:layout_height="38dp"
         android:drawableEnd="@drawable/ic_cancel_white_24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="440dp"
         android:ems="10"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.744" />
 
     <Button
         android:id="@+id/open_link_button"
-        android:layout_width="88dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="440dp"
+        android:layout_width="83dp"
+        android:layout_height="37dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="open_external_link"
+        android:onClick="openExternalLink"
         android:text="@string/open_link"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.208"
         app:layout_constraintStart_toEndOf="@+id/txt_link"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.743" />
+
+    <Button
+        android:id="@+id/btn_turn_off_screen"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@android:drawable/ic_delete"
+        android:onClick="getCommand"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/skip_anime_intro"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="Skip"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.549" />
+
+    <Button
+        android:id="@+id/stretch_wide"
+        android:layout_width="120dp"
+        android:layout_height="46dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="16:9"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.958" />
+
+    <Button
+        android:id="@+id/f1"
+        android:layout_width="2dp"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="F1"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.542" />
+
+    <Button
+        android:id="@+id/f2"
+        android:layout_width="2dp"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="getCommand"
+        android:text="F2"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.64" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
