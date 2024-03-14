@@ -3,16 +3,23 @@
     android:height="495dp"
     android:viewportWidth="495"
     android:viewportHeight="495">
+
+
+  <!-- Main shape with a modern dark color -->
   <path
       android:pathData="M186.062,341.575V153.425l61.438,35.486V0C110.81,0 0,110.81 0,247.5S110.81,495 247.5,495V306.089L186.062,341.575z"
-      android:fillColor="#6D2C93"/>
+      android:fillColor="#1a1a1a"/>
+
+  <!-- Secondary shape with a slightly lighter shade -->
   <path
       android:pathData="M247.5,0v188.911L348.938,247.5L247.5,306.089V495C384.19,495 495,384.19 495,247.5S384.19,0 247.5,0z"
-      android:fillColor="#3D1952"/>
+      android:fillColor="#333333"/>
+
+  <!-- Accent shapes with a brighter color -->
   <path
       android:pathData="M186.062,247.5l0,94.075l61.438,-35.486l101.438,-58.589z"
-      android:fillColor="#9CDD05"/>
+      android:fillColor="#630101"/>
   <path
       android:pathData="M186.062,247.5l162.876,0l-101.438,-58.589l-61.438,-35.486z"
-      android:fillColor="#B2FA09"/>
+      android:fillColor="#630101"/>
 </vector>

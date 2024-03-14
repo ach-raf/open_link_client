@@ -4,4 +4,22 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#00001a</color>
     <color name="colorWhite">#ffffff</color>
+
+    <!-- Base application colors -->
+    <color name="dark_background">#121212</color>
+    <color name="dark_primary">#1F1B24</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Additional colors for UI elements -->
+    <color name="light_gray">#CCCCCC</color>
+    <color name="dark_gray">#444444</color>
+    <color name="accent">#BB86FC</color>
+
+    <!-- State colors (e.g., for buttons, progress bars) -->
+    <color name="state_enabled">#FF018786</color>
+    <color name="state_disabled">#FFC7C7C7</color>
+
+    <!-- Other specific colors you might need -->
+    <color name="error">#B00020</color>
+    <color name="success">#4CAF50</color>
 </resources>

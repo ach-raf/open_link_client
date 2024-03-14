@@ -72,23 +72,12 @@ class MainActivity : AppCompatActivity() {
         registerForContextMenu(txtServerStatus)
 
         txtIp = findViewById(R.id.txt_ip)
-        switchBluetooth = findViewById(R.id.bluetooth_switch)
+
 
         txtLink = findViewById(R.id.txt_link)
         //calling the listener of a drawableEnd button to clear a TextInputEditText
         txtLink?.setOnTouchListener(clearTextInputDrawableOnTouchListener())
 
-
-
-        switchBluetooth?.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                // The toggle is enabled
-                sendCommand(bluetoothOn)
-            } else {
-                // The toggle is disabled
-                sendCommand(bluetoothOff)
-            }
-        }
 
         // Get link from the share menu
         val intent = intent
@@ -140,6 +129,7 @@ class MainActivity : AppCompatActivity() {
         val command: String = when (view.id) {
             R.id.volume_reduce_button -> "volume down"
             R.id.volume_increase_button -> "volume up"
+            R.id.mute_volume -> "alt+m"
             R.id.minus_10_seconds -> "left arrow"
             R.id.plus_10_seconds -> "right arrow"
             R.id.minus_20_seconds -> "alt+left arrow"
@@ -158,6 +148,12 @@ class MainActivity : AppCompatActivity() {
             R.id.stretch_wide -> "16_9"
             R.id.f1 -> "f1"
             R.id.f2 -> "f2"
+            R.id.esc -> "esc"
+            R.id.history -> "history"
+            R.id.enter -> "enter"
+            R.id.shaders -> "shaders"
+            R.id.overlay -> "overlay"
+            R.id.subtitle_style -> "subtitle_style"
 
             else -> throw IllegalStateException("Unexpected value: " + view.id)
         }
@@ -165,15 +161,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-    fun bluetoothButton(view: View) {
-        if (bluetoothBtnClickedCounter % 2 == 0) {
-            sendCommand(bluetoothOn)
-        } else {
-            sendCommand(bluetoothOff)
-        }
-        bluetoothBtnClickedCounter++
-    }
 
     fun sendCommand(command: String) {
         host = txtIp?.text.toString()

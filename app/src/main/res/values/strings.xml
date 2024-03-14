@@ -12,18 +12,24 @@
     <string name="plus_20_seconds">+20</string>
     <string name="volume_up">+</string>
     <string name="volume_down">-</string>
+    <string name="mute_volume">Mute</string>
     <string name="open_link">Open link</string>
     <string name="ip">IP</string>
     <string name="volume">Volume</string>
     <string name="connected">connected</string>
     <string name="subtitle">S</string>
     <string name="subtitle_search">D</string>
-    <string name="audio">Audio</string>
+    <string name="audio">A</string>
     <string name="off">OFF</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_off">OFF</string>
     <string name="bluetooth_on">ON</string>
     <string name="go">Go</string>
+    <string name="skip_intro">Skip intro</string>
+    <string name="history">History</string>
+    <string name="shaders">Shaders</string>
+    <string name="overlay">Overlay</string>
+    <string name="u">U</string>
 
     <string-array name="remote_controllers_list">
         <item>MPC</item>

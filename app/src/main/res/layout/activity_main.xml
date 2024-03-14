@@ -8,20 +8,6 @@
 
     tools:context="com.openlinkclient.MainActivity">
 
-    <Button
-        android:id="@+id/audio_button"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="getCommand"
-        android:text="@string/audio"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.749"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
-
 
     <TextView
         android:id="@+id/txt_server_status"
@@ -40,101 +26,151 @@
         android:id="@+id/txt_ip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
+        android:layout_marginTop="24dp"
         android:inputType="textPersonName"
         android:text=""
         android:textColor="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/f2"
+        app:layout_constraintEnd_toStartOf="@+id/btn_turn_off_screen"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toEndOf="@+id/esc"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/label_ip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/ip"
-        android:textColor="@color/colorWhite"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/txt_ip"
-        app:layout_constraintHorizontal_bias="0.789"
+    <EditText
+        android:id="@+id/txt_link"
+        android:layout_width="264dp"
+        android:layout_height="38dp"
+        android:drawableEnd="@drawable/ic_cancel_white_24dp"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
+
+    <Button
+        android:id="@+id/open_link_button"
+        android:layout_width="83dp"
+        android:layout_height="37dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="openExternalLink"
+        android:text="@string/open_link"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.227"
+        app:layout_constraintStart_toEndOf="@+id/txt_link"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.887" />
+
+    <Button
+        android:id="@+id/btn_turn_off_screen"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@android:drawable/ic_delete"
+        android:onClick="getCommand"
+        app:layout_constraintBottom_toTopOf="@+id/skip_anime_intro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.969"
+        app:layout_constraintStart_toEndOf="@+id/f2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.027" />
+
+    <Button
+        android:id="@+id/skip_anime_intro"
+        android:layout_width="176dp"
+        android:layout_height="49dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/skip_intro"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.77"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.932" />
+
+    <Button
+        android:id="@+id/stretch_wide"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="16:9"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/open_link_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.847"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629" />
 
     <Button
         android:id="@+id/subtitle_button"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
         android:onClick="getCommand"
         android:text="@string/subtitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintVertical_bias="0.524" />
+
+    <Button
+        android:id="@+id/subtitle_style"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/u"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.977" />
 
     <Button
         android:id="@+id/subtitle_search"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
         android:onClick="getCommand"
         android:text="@string/subtitle_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintVertical_bias="0.524" />
 
     <Button
-        android:id="@+id/skip_forward_button"
+        android:id="@+id/audio_button"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/ic_skip_forward"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
         android:onClick="getCommand"
-        android:textSize="10sp"
+        android:text="@string/audio"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.816"
+        app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
-
-    <Button
-        android:id="@+id/minus_10_seconds"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="getCommand"
-        android:text="@string/minus_10_seconds"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392" />
-
-    <Button
-        android:id="@+id/minus_20_seconds"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="getCommand"
-        android:text="@string/minus_20_seconds"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392" />
+        app:layout_constraintVertical_bias="0.524" />
 
     <Button
         android:id="@+id/stop_button"
@@ -144,80 +180,10 @@
         android:onClick="getCommand"
         app:layout_constraintBottom_toTopOf="@+id/txt_link"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/play_pause_button"
-        app:layout_constraintVertical_bias="0.301" />
-
-    <Button
-        android:id="@+id/previous_chapter_button"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@drawable/ic_backward"
-        android:onClick="getCommand"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
-
-    <Button
-        android:id="@+id/plus_20_seconds"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="getCommand"
-        android:text="@string/plus_20_seconds"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.825"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392" />
-
-    <Button
-        android:id="@+id/next_chapter_button"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@drawable/ic_fast_forward"
-        android:onClick="getCommand"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
-
-    <Button
-        android:id="@+id/plus_10_seconds"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="getCommand"
-        android:text="@string/plus_10_seconds"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392" />
-
-    <Button
-        android:id="@+id/skip_back_button"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@drawable/ic_previous"
-        android:onClick="getCommand"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
+        app:layout_constraintVertical_bias="0.504" />
 
     <Button
         android:id="@+id/play_pause_button"
@@ -230,151 +196,289 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subtitle_button"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.109" />
+
+    <Button
+        android:id="@+id/minus_20_seconds"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/minus_20_seconds"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/previous_chapter_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/volume_reduce_button"
+        app:layout_constraintVertical_bias="0.905" />
+
+    <Button
+        android:id="@+id/minus_10_seconds"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/minus_10_seconds"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/previous_chapter_button"
+        app:layout_constraintEnd_toStartOf="@+id/play_pause_button"
+        app:layout_constraintHorizontal_bias="0.405"
+        app:layout_constraintStart_toEndOf="@+id/minus_20_seconds"
+        app:layout_constraintTop_toBottomOf="@+id/volume_reduce_button"
+        app:layout_constraintVertical_bias="0.905" />
+
 
     <Button
         android:id="@+id/volume_increase_button"
         android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_height="68dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
         android:onClick="getCommand"
         android:text="@string/volume_up"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/play_pause_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.238" />
+        app:layout_constraintTop_toBottomOf="@+id/mute_volume"
+        app:layout_constraintVertical_bias="0.3" />
 
     <Button
         android:id="@+id/volume_reduce_button"
         android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_height="68dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
         android:onClick="getCommand"
         android:text="@string/volume_down"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/play_pause_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintTop_toBottomOf="@+id/volume_increase_button"
+        app:layout_constraintVertical_bias="0.205" />
 
-    <TextView
-        android:id="@+id/label_volume"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:text="@string/volume"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/mute_volume"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/mute_volume"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.163" />
-
-    <EditText
-        android:id="@+id/txt_link"
-        android:layout_width="264dp"
-        android:layout_height="38dp"
-        android:drawableEnd="@drawable/ic_cancel_white_24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.744" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_ip"
+        app:layout_constraintVertical_bias="0.515" />
 
     <Button
-        android:id="@+id/open_link_button"
-        android:layout_width="83dp"
-        android:layout_height="37dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="openExternalLink"
-        android:text="@string/open_link"
+        android:id="@+id/next_chapter_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_fast_forward"
+        android:onClick="getCommand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/skip_forward_button"
+        app:layout_constraintHorizontal_bias="0.718"
+        app:layout_constraintStart_toEndOf="@+id/stop_button"
+        app:layout_constraintTop_toBottomOf="@+id/play_pause_button"
+        app:layout_constraintVertical_bias="0.009" />
+
+    <Button
+        android:id="@+id/skip_forward_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/ic_skip_forward"
+        android:onClick="getCommand"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.701" />
+
+    <Button
+        android:id="@+id/plus_10_seconds"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/plus_10_seconds"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.675"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.633" />
+
+
+    <Button
+        android:id="@+id/plus_20_seconds"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/plus_20_seconds"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.633" />
+
+    <Button
+        android:id="@+id/skip_back_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_previous"
+        android:onClick="getCommand"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.208"
-        app:layout_constraintStart_toEndOf="@+id/txt_link"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.743" />
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/minus_20_seconds"
+        app:layout_constraintVertical_bias="0.014" />
 
     <Button
-        android:id="@+id/btn_turn_off_screen"
+        android:id="@+id/previous_chapter_button"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:background="@android:drawable/ic_delete"
+        android:background="@drawable/ic_backward"
         android:onClick="getCommand"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/skip_anime_intro"
-        android:layout_width="120dp"
-        android:layout_height="45dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="getCommand"
-        android:text="Skip"
-        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549" />
-
-    <Button
-        android:id="@+id/stretch_wide"
-        android:layout_width="120dp"
-        android:layout_height="46dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="getCommand"
-        android:text="16:9"
-        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958" />
+        app:layout_constraintBottom_toTopOf="@+id/txt_link"
+        app:layout_constraintEnd_toStartOf="@+id/stop_button"
+        app:layout_constraintHorizontal_bias="0.405"
+        app:layout_constraintStart_toEndOf="@+id/skip_back_button"
+        app:layout_constraintTop_toBottomOf="@+id/play_pause_button"
+        app:layout_constraintVertical_bias="0.021" />
 
     <Button
         android:id="@+id/f1"
-        android:layout_width="2dp"
-        android:layout_height="2dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
         android:onClick="getCommand"
         android:text="F1"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
+        app:layout_constraintBottom_toTopOf="@+id/enter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_ip"
+        app:layout_constraintVertical_bias="0.272" />
 
     <Button
         android:id="@+id/f2"
-        android:layout_width="2dp"
-        android:layout_height="2dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
         android:onClick="getCommand"
         android:text="F2"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
+        app:layout_constraintBottom_toTopOf="@+id/skip_anime_intro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintStart_toEndOf="@+id/f1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_turn_off_screen"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+        android:id="@+id/esc"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="ESC"
+        app:layout_constraintBottom_toTopOf="@+id/volume_increase_button"
+        app:layout_constraintEnd_toStartOf="@+id/btn_turn_off_screen"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
+        app:layout_constraintVertical_bias="0.085" />
+
+    <Button
+        android:id="@+id/shaders"
+        android:layout_width="88dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/shaders"
+        app:layout_constraintBottom_toTopOf="@+id/enter"
+        app:layout_constraintEnd_toStartOf="@+id/btn_turn_off_screen"
+        app:layout_constraintHorizontal_bias="0.394"
+        app:layout_constraintStart_toEndOf="@+id/f2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ip"
+        app:layout_constraintVertical_bias="0.909" />
+
+    <Button
+        android:id="@+id/enter"
+        android:layout_width="88dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="Enter"
+        app:layout_constraintBottom_toTopOf="@+id/skip_anime_intro"
+        app:layout_constraintEnd_toStartOf="@+id/btn_turn_off_screen"
+        app:layout_constraintHorizontal_bias="0.394"
+        app:layout_constraintStart_toEndOf="@+id/f2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ip"
+        app:layout_constraintVertical_bias="0.875" />
+
+    <Button
+        android:id="@+id/history"
+        android:layout_width="88dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/history"
+        app:layout_constraintBottom_toTopOf="@+id/skip_anime_intro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toEndOf="@+id/enter"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ip"
+        app:layout_constraintVertical_bias="0.875" />
+
+    <Button
+        android:id="@+id/overlay"
+        android:layout_width="88dp"
+        android:layout_height="44dp"
+        android:background="@drawable/button_background"
+        android:elevation="8dp"
+        android:onClick="getCommand"
+        android:text="@string/overlay"
+        app:layout_constraintBottom_toTopOf="@+id/history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toEndOf="@+id/enter"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ip"
+        app:layout_constraintVertical_bias="0.909" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
