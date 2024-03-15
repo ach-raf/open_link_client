@@ -3,7 +3,7 @@ name: Build and Release APK
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -32,5 +32,6 @@ jobs:
           asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ steps.extract_version.outputs.version_name }}.apk
           asset_name: OpenLinkClient-${{ steps.extract_version.outputs.version_name }}.apk
           asset_content_type: application/vnd.android.package-archive
+          distribution: "public"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
