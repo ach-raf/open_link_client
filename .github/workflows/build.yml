@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.before }} # Use the ref instead of the default branch
 
       - name: Set up JDK 11
         uses: actions/setup-java@v2
@@ -27,13 +25,23 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew assembleRelease
 
-      - name: Upload APK to Releases
-        uses: actions/upload-release-asset@v1
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.repository.releases_url }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload APK to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ steps.extract_version.outputs.version_name }}.apk
           asset_name: OpenLinkClient-${{ steps.extract_version.outputs.version_name }}.apk
           asset_content_type: application/vnd.android.package-archive
-          distribution: "public"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
