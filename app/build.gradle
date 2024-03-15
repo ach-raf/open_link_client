@@ -18,10 +18,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Set the output file name for the release build
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "OpenLinkClient-${variant.versionName}.apk"
+                }
+            }
         }
     }
+    // Other configurations...
     namespace 'com.openlinkclient'
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
