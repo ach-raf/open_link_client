@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -27,6 +30,7 @@ jobs:
 
       - name: Create Release
         id: create_release
+        if: github.event_name == 'push'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,6 +41,7 @@ jobs:
           prerelease: false
 
       - name: Upload APK to Release
+        if: github.event_name == 'push'
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
