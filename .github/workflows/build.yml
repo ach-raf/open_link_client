@@ -93,6 +93,14 @@ jobs:
           draft: false
           prerelease: false
 
+      # Capture Version Information
+      - name: Capture Version Information
+        id: version_info
+        run: |
+          ./gradlew printVersionInformation
+          echo "version_name=$(./gradlew -q printVersionInformation --console=plain | cut -d ' ' -f 1 | sed 's/v//')" >> $GITHUB_ENV
+          echo "version_code=$(./gradlew -q printVersionInformation --console=plain | cut -d ' ' -f 2 | sed 's/(//' | sed 's/)//')" >> $GITHUB_ENV
+
       # Upload APK Debug to Release
       - name: Upload APK Debug to Release
         uses: actions/upload-release-asset@v1
@@ -100,8 +108,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.main_project_module }}/build/outputs/apk/debug/${{ env.playstore_name }}-debug.apk
-          asset_name: ${{ env.playstore_name }}-${{ env.date_today }}-debug.apk
+          asset_path: ${{ env.main_project_module }}/build/outputs/apk/debug/${{ env.playstore_name }}-${{ env.version_name }}.apk
+          asset_name: ${{ env.playstore_name }}-${{ env.version_name }}-${{ env.version_code }}-debug.apk
           asset_content_type: application/vnd.android.package-archive
 
       # Upload APK Release to Release
@@ -111,8 +119,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.main_project_module }}/build/outputs/apk/release/${{ env.playstore_name }}-release.apk
-          asset_name: ${{ env.playstore_name }}-${{ env.date_today }}-release.apk
+          asset_path: ${{ env.main_project_module }}/build/outputs/apk/release/${{ env.playstore_name }}-${{ env.version_name }}.apk
+          asset_name: ${{ env.playstore_name }}-${{ env.version_name }}-${{ env.version_code }}-release.apk
           asset_content_type: application/vnd.android.package-archive
 
       # Upload AAB to Release
@@ -122,6 +130,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.playstore_name }}-release.aab
-          asset_name: ${{ env.playstore_name }}-${{ env.date_today }}-release.aab
+          asset_path: ${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.playstore_name }}-${{ env.version_name }}.aab
+          asset_name: ${{ env.playstore_name }}-${{ env.version_name }}-${{ env.version_code }}-release.aab
           asset_content_type: application/vnd.android.package-archive
