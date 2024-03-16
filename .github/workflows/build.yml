@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: "zulu" # See 'Supported distributions' for available options
-          java-version: "17"
+          java-version: "19"
           cache: "gradle"
 
       - name: Change wrapper permissions
@@ -80,13 +80,3 @@ jobs:
         with:
           name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - App bundle(s) AAB release generated
           path: ${{ env.main_project_module }}/build/outputs/bundle/release/
-
-      # Create a release on GitHub
-      - name: Create Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "${{ env.main_project_module }}/build/outputs/apk/debug/*,${{ env.main_project_module }}/build/outputs/apk/release/*,${{ env.main_project_module }}/build/outputs/bundle/release/*"
-          bodyFile: "release_notes.md"
-          draft: true
-          generateReleaseNotes: true
-          token: ${{ secrets.GITHUB_TOKEN }}
