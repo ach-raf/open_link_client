@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: "zulu"
-          java-version: "11"
+          java-version: "19"
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
@@ -27,9 +27,13 @@ jobs:
       - name: Build Project
         run: ./gradlew assembleRelease
 
-      - name: Extract Version Name
-        id: extract_version
-        run: echo "::set-output name=version_name::$(grep -oP '(?<=versionName \").\*(?=\")' app/build.gradle)"
+      - name: Extract App Name and Version Name
+        id: extract_names
+        run: |
+          APP_NAME=$(grep -oP '(?<=publicRealm").\*(?=")' app/build.gradle | tr . _)
+          VERSION_NAME=$(grep -oP '(?<=versionName \").\*(?=\")' app/build.gradle)
+          echo "::set-output name=app_name::$APP_NAME"
+          echo "::set-output name=version_name::$VERSION_NAME"
 
       - name: Create Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -49,6 +53,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/release/app-release.apk
-          asset_name: OpenLinkClient-${{ steps.extract_version.outputs.version_name }}.apk
+          asset_path: app/build/outputs/apk/release/${{ steps.extract_names.outputs.app_name }}-${{ steps.extract_names.outputs.version_name }}.apk
+          asset_name: ${{ steps.extract_names.outputs.app_name }}-${{ steps.extract_names.outputs.version_name }}.apk
           asset_content_type: application/vnd.android.package-archive
