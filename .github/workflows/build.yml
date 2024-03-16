@@ -36,8 +36,8 @@ jobs:
       - name: Get Version Information
         id: get_version
         run: |
-          echo "version_information=$(./gradlew -q printVersionInformation)" >> $GITHUB_ENV
-          echo "version_tag=v$(./gradlew -q printVersionInformation | sed 's/\./-/g')" >> $GITHUB_ENV
+          echo "version_information=$(./gradlew -q printVersionInformation | tr -dc '[:alnum:]-.')" >> $GITHUB_ENV
+          echo "version_tag=v$(./gradlew -q printVersionInformation | tr -dc '[:alnum:]-.' | sed 's/\./-/g')" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
