@@ -38,8 +38,10 @@ android {
 
     // Other configurations...
     namespace 'com.openlinkclient'
-    task printVersionInformation {
-        println "v" + defaultConfig.versionName + " (" + defaultConfig.versionCode + ")"
+    tasks.register('printVersionInformation') {
+        doLast {
+            println "v" + android.defaultConfig.versionName + " (" + android.defaultConfig.versionCode + ")"
+        }
     }
 }
 
