@@ -8,6 +8,9 @@ on:
     branches:
       - master
 
+env:
+  GRADLE_USER_HOME: ${{ github.workspace }}/.gradle
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,39 +24,38 @@ jobs:
           distribution: "zulu"
           java-version: "19"
 
-      - name: Change wrapper permissions
-        run: chmod +x ./gradlew
-
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: wrapper
+          cache-read-only: ${{ github.event_name == 'pull_request' }}
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
 
       - name: Build Project
         run: ./gradlew assembleRelease
 
       - name: Get Version Information
-        id: get-version-info
+        id: version
         run: |
-          VERSION_INFORMATION=$(./gradlew -q printVersionInformation)
-          echo "version=$VERSION_INFORMATION" >> $GITHUB_OUTPUT
+          VERSION=$(./gradlew -q printVersionInformation)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Create Release Tag
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        id: create_tag
         run: |
-          TAG_NAME="release-${{ steps.get-version-info.outputs.version }}-${{ github.sha }}"
-          echo "release_tag=$TAG_NAME" >> $GITHUB_OUTPUT
+          TAG_NAME="release-${{ steps.version.outputs.version }}-${{ github.sha }}"
+          echo "release_tag=$TAG_NAME" >> $GITHUB_ENV
 
       - name: Create Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.create_tag.outputs.release_tag }}
-          release_name: Release ${{ steps.get-version-info.outputs.version }}
+          tag_name: ${{ env.release_tag }}
+          release_name: Release ${{ steps.version.outputs.version }}
           draft: false
           prerelease: false
 
@@ -63,7 +65,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ steps.get-version-info.outputs.version }}.apk
-          asset_name: OpenLinkClient-${{ steps.get-version-info.outputs.version }}.apk
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ steps.version.outputs.version }}.apk
+          asset_name: OpenLinkClient-${{ steps.version.outputs.version }}.apk
           asset_content_type: application/vnd.android.package-archive
