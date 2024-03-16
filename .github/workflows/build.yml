@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,6 +34,7 @@ jobs:
 
       - name: Get Version Information
         run: echo "VERSION_INFORMATION=$(./gradlew -q printVersionInformation)" >> $GITHUB_OUTPUT
+        id: get-version-information
 
       - name: Create Release Tag
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -52,6 +53,7 @@ jobs:
           release_name: Release ${{ steps.get-version-information.outputs.VERSION_INFORMATION }}
           draft: false
           prerelease: false
+        id: create_release
 
       - name: Upload APK to Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
