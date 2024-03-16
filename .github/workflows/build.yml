@@ -9,28 +9,12 @@ on:
       - master
 
 jobs:
-  create-release:
+  build_and_release:
     runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-    steps:
-      - name: Create Release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-        id: create_release
 
-  build:
-    needs: create-release
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -50,16 +34,26 @@ jobs:
         run: ./gradlew assembleRelease
 
       - name: Get Version Information
-        run: echo "VERSION_INFORMATION=$(./gradlew -q printVersionInformation)" >> $GITHUB_OUTPUT
-        id: get-version-information
+        id: get_version
+        run: echo "::set-output name=version_information::$(./gradlew -q printVersionInformation)"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.version_information }}
+          release_name: Release ${{ steps.get_version.outputs.version_information }}
+          draft: false
+          prerelease: false
 
       - name: Upload APK to Release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ steps.get-version-information.outputs.VERSION_INFORMATION }}.apk
-          asset_name: OpenLinkClient-${{ steps.get-version-information.outputs.VERSION_INFORMATION }}.apk
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ steps.get_version.outputs.version_information }}.apk
+          asset_name: OpenLinkClient-${{ steps.get_version.outputs.version_information }}.apk
           asset_content_type: application/vnd.android.package-archive
