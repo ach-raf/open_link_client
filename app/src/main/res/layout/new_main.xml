@@ -5,51 +5,214 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/background">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-        </LinearLayout>
-
+        <!-- Volume Controls -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/volume_reduce_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_volume_down"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/volume_down" />
+
+            <SeekBar
+                android:id="@+id/volume_seekbar"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:max="100"
+                android:progress="50"
+                android:progressTint="@color/primary" />
+
+            <ImageButton
+                android:id="@+id/volume_increase_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_volume_up"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/volume_up" />
+
+        </LinearLayout>
+
+        <!-- Playback Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <ImageButton
+                android:id="@+id/previous_chapter_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_skip_previous"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/previous_chapter" />
+
+            <ImageButton
+                android:id="@+id/rewind_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_rewind"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/rewind" />
+
+            <ImageButton
+                android:id="@+id/play_pause_button"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_play"
+                android:background="@drawable/circle_background"
+                android:contentDescription="@string/play_pause" />
+
+            <ImageButton
+                android:id="@+id/forward_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_forward"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/forward" />
+
+            <ImageButton
+                android:id="@+id/next_chapter_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_skip_next"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/next_chapter" />
+
+        </LinearLayout>
+
+        <!-- Time Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <ImageButton
+                android:id="@+id/minus_20_seconds"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_minus_20_seconds"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/minus_20_seconds" />
+
+            <ImageButton
+                android:id="@+id/minus_10_seconds"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_minus_10_seconds"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/minus_10_seconds" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/current_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:text="00:00:00"
+                android:textSize="16sp"
+                android:textColor="@color/primary_text" />
 
-            <Button
-                android:id="@+id/button"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
+                android:text="/"
+                android:textSize="16sp"
+                android:textColor="@color/primary_text" />
+
+            <TextView
+                android:id="@+id/total_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textSize="16sp"
+                android:textColor="@color/primary_text" />
+
+            <ImageButton
+                android:id="@+id/plus_10_seconds"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_plus_10_seconds"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/plus_10_seconds" />
+
+            <ImageButton
+                android:id="@+id/plus_20_seconds"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_plus_20_seconds"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/plus_20_seconds" />
+
         </LinearLayout>
+
+        <!-- Additional Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <ImageButton
+                android:id="@+id/subtitle_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_subtitle"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/subtitle" />
+
+            <ImageButton
+                android:id="@+id/subtitle_search"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_subtitle_search"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/subtitle_search" />
+
+            <ImageButton
+                android:id="@+id/audio_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_audio"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/audio" />
+
+            <ImageButton
+                android:id="@+id/aspect_ratio_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_aspect_ratio"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/aspect_ratio" />
+
+            <ImageButton
+                android:id="@+id/settings_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_settings"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/settings" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
