@@ -48,12 +48,16 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Get Upload URL
+        run: echo "upload_url=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
+
       - name: Upload APK to Release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          upload_url: ${{ env.upload_url }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ env.upload_url }} # Dummy upload_url input
           asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ steps.get_version.outputs.version_information }}.apk
           asset_name: OpenLinkClient-${{ steps.get_version.outputs.version_information }}.apk
           asset_content_type: application/vnd.android.package-archive
