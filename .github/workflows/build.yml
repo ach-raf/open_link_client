@@ -33,6 +33,10 @@ jobs:
       - name: Build Project
         run: ./gradlew assembleRelease
 
+      # Print the contents of the directory to verify APK existence and location
+      - name: List Directory Contents
+        run: ls -R
+
       - name: Get Version Information
         id: get_version
         run: |
@@ -56,7 +60,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           upload_url: ${{ steps.create_release.outputs.upload_url }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # Dummy upload_url input
-          asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ env.version_information }}.apk
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          # Adjust the path based on the actual directory structure of the project
+          asset_path: app/release/*.apk
           asset_name: OpenLinkClient-${{ env.version_information }}.apk
           asset_content_type: application/vnd.android.package-archive
