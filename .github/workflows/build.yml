@@ -30,14 +30,21 @@ jobs:
       - name: Build Project
         run: ./gradlew assembleRelease
 
+      - name: Create Release Tag
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          TAG_NAME="release-${{ env.VERSION_INFORMATION }}-${{ github.sha }}"
+          echo "::set-output name=tag_name::$TAG_NAME"
+        id: create_tag
+
       - name: Create Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
+          tag_name: ${{ steps.create_tag.outputs.tag_name }}
+          release_name: Release ${{ env.VERSION_INFORMATION }}
           draft: false
           prerelease: false
 
