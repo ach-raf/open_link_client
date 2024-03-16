@@ -59,6 +59,13 @@ jobs:
       - name: Build app bundle release (AAB) - ${{ env.main_project_module }} module
         run: ./gradlew ${{ env.main_project_module }}:bundleRelease
 
+      # Capture Version Information
+      - name: Get Version Information
+        id: get_version
+        run: |
+          echo "version_information=$(./gradlew -q printVersionInformation | tr -dc '[:alnum:].-')" >> $GITHUB_ENV
+          echo "version_tag=v$(./gradlew -q printVersionInformation | tr -dc '[:alnum:].-' | sed 's/\\./-/g')" >> $GITHUB_ENV
+
       # Upload Artifact Build
       # Noted For Output [main_project_module]/build/outputs/apk/debug/
       - name: Upload APK Debug - ${{ env.repository_name }}
@@ -88,18 +95,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.date_today }}-${{ github.run_number }}
-          release_name: Release ${{ env.date_today }}
+          tag_name: ${{ env.version_tag }}-${{ github.run_number }}
+          release_name: Release ${{ env.version_information }}
           draft: false
           prerelease: false
-
-      # Capture Version Information
-      - name: Capture Version Information
-        id: version_info
-        run: |
-          ./gradlew printVersionInformation
-          echo "version_name=$(./gradlew -q printVersionInformation --console=plain | cut -d ' ' -f 1 | sed 's/v//')" >> $GITHUB_ENV
-          echo "version_code=$(./gradlew -q printVersionInformation --console=plain | cut -d ' ' -f 2 | sed 's/(//' | sed 's/)//')" >> $GITHUB_ENV
 
       # Upload APK Debug to Release
       - name: Upload APK Debug to Release
@@ -108,8 +107,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.main_project_module }}/build/outputs/apk/debug/${{ env.playstore_name }}-${{ env.version_name }}.apk
-          asset_name: ${{ env.playstore_name }}-${{ env.version_name }}-${{ env.version_code }}-debug.apk
+          asset_path: ${{ env.main_project_module }}/build/outputs/apk/debug/${{ env.playstore_name }}-${{ env.version_information }}.apk
+          asset_name: ${{ env.playstore_name }}-${{ env.version_information }}-debug.apk
           asset_content_type: application/vnd.android.package-archive
 
       # Upload APK Release to Release
@@ -119,8 +118,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.main_project_module }}/build/outputs/apk/release/${{ env.playstore_name }}-${{ env.version_name }}.apk
-          asset_name: ${{ env.playstore_name }}-${{ env.version_name }}-${{ env.version_code }}-release.apk
+          asset_path: ${{ env.main_project_module }}/build/outputs/apk/release/${{ env.playstore_name }}-${{ env.version_information }}.apk
+          asset_name: ${{ env.playstore_name }}-${{ env.version_information }}-release.apk
           asset_content_type: application/vnd.android.package-archive
 
       # Upload AAB to Release
@@ -130,6 +129,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.playstore_name }}-${{ env.version_name }}.aab
-          asset_name: ${{ env.playstore_name }}-${{ env.version_name }}-${{ env.version_code }}-release.aab
+          asset_path: ${{ env.main_project_module }}/build/outputs/bundle/release/${{ env.playstore_name }}-${{ env.version_information }}.aab
+          asset_name: ${{ env.playstore_name }}-${{ env.version_information }}-release.aab
           asset_content_type: application/vnd.android.package-archive
