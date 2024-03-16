@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     private var txtServerStatus: TextView? = null
     private var txtIp: EditText? = null
     private var txtLink: EditText? = null
-    private var switchBluetooth: Switch? = null
 
     private var socket: Socket? = null
     private var host: String? = null
@@ -41,10 +40,6 @@ class MainActivity : AppCompatActivity() {
 
     // This is the activity main thread Handler.
     private var updateUIHandler: Handler? = null
-    private val bluetoothOn = "bluetooth_on"
-    private val bluetoothOff = "bluetooth_off"
-
-    private var bluetoothBtnClickedCounter: Int = 0
 
     private lateinit var pref: SharedPreferences
 
@@ -63,10 +58,7 @@ class MainActivity : AppCompatActivity() {
         getServerAddress()
 
         // Register for broadcasts on BluetoothAdapter state change
-        val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
-        registerReceiver(mReceiver, filter)
 
-        //
         txtServerStatus = findViewById(R.id.txt_server_status)
         // Override onCreateContextMenu to change behavior
         registerForContextMenu(txtServerStatus)
@@ -230,34 +222,6 @@ class MainActivity : AppCompatActivity() {
         tcpServer.start()
     }
 
-    private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val action = intent.action!!
-            if (action == BluetoothAdapter.ACTION_STATE_CHANGED) {
-                val state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-                        BluetoothAdapter.ERROR)
-                when (state) {
-                    BluetoothAdapter.STATE_OFF -> bluetoothStateChange("STATE_OFF")
-                    BluetoothAdapter.STATE_TURNING_OFF -> bluetoothStateChange("STATE_TURNING_OFF")
-                    BluetoothAdapter.STATE_ON -> bluetoothStateChange("STATE_ON")
-                    BluetoothAdapter.STATE_TURNING_ON -> bluetoothStateChange("STATE_TURNING_ON")
-                }
-            }
-        }
-
-        private fun bluetoothStateChange(bluetooth_state: String) {
-            if (bluetooth_state == "STATE_TURNING_OFF") {
-                // when the state is off turn bluetooth on on computer
-                sendCommand(bluetoothOn)
-
-            } else if (bluetooth_state == "STATE_TURNING_ON") {
-                // to disconnect the bluetooth on the computer
-                sendCommand(bluetoothOff)
-
-            }
-        }
-    }
-
     override fun onCreateContextMenu(menu: ContextMenu, view: View,
                                      menuInfo: ContextMenu.ContextMenuInfo) {
         // user has long pressed your TextView
@@ -272,16 +236,6 @@ class MainActivity : AppCompatActivity() {
                 .newPlainText("last link", yourTextView.text)
         //clipboard.primaryClip = clipData
     }
-
-    public override fun onDestroy() {
-        super.onDestroy()
-
-        /* ... */
-
-        // Unregister broadcast listeners
-        unregisterReceiver(mReceiver)
-    }
-
     companion object {
         // Message type code.
         private const val MESSAGE_UPDATE_TEXT_CHILD_THREAD = 1
