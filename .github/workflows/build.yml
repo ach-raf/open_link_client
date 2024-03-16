@@ -35,59 +35,6 @@ jobs:
 
       - name: Get Version Information
         id: get_version
-        run: echo "::set-output name=version_information::$(./gradlew -q printVersionInformation)"
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.get_version.outputs.version_information }}
-          release_name: Release ${{ steps.get_version.outputs.version_information }}
-          draft: false
-          prerelease: false
-
-      - name: Get Upload URL
-        run: echo "upload_url=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
-
-      name: Build and Release APK
-
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-
-jobs:
-  build_and_release:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: "zulu"
-          java-version: "19"
-
-      - name: Change wrapper permissions
-        run: chmod +x ./gradlew
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: wrapper
-
-      - name: Build Project
-        run: ./gradlew assembleRelease
-
-      - name: Get Version Information
-        id: get_version
         run: |
           echo "version_information=$(./gradlew -q printVersionInformation)" >> $GITHUB_ENV
           echo "version_tag=v$(./gradlew -q printVersionInformation | sed 's/\./-/g')" >> $GITHUB_ENV
