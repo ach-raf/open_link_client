@@ -14,6 +14,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,7 +29,11 @@ android {
     }
     // Other configurations...
     namespace 'com.openlinkclient'
+    task printVersionInformation {
+        println "v" + defaultConfig.versionName + " (" + defaultConfig.versionCode + ")"
+    }
 }
+
 
 
 dependencies {

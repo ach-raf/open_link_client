@@ -24,16 +24,11 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
+      - name: Set VERSION_INFORMATION
+        run: echo "VERSION_INFORMATION=$(./gradlew -q printVersionInformation)" >> $GITHUB_ENV
+
       - name: Build Project
         run: ./gradlew assembleRelease
-
-      - name: Extract App Name and Version Name
-        id: extract_names
-        run: |
-          APP_NAME=$(grep -oP '(?<=applicationId \").\*(?=\")' app/build.gradle | cut -d'.' -f2)
-          VERSION_NAME=$(grep -oP '(?<=versionName \").\*(?=\")' app/build.gradle)
-          echo "::set-output name=app_name::$APP_NAME"
-          echo "::set-output name=version_name::$VERSION_NAME"
 
       - name: Create Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -53,6 +48,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ steps.extract_names.outputs.version_name }}.apk
-          asset_name: OpenLinkClient-${{ steps.extract_names.outputs.version_name }}.apk
+          asset_path: app/build/outputs/apk/release/OpenLinkClient-${{ env.VERSION_INFORMATION }}.apk
+          asset_name: OpenLinkClient-${{ env.VERSION_INFORMATION }}.apk
           asset_content_type: application/vnd.android.package-archive
