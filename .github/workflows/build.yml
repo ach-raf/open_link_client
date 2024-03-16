@@ -100,7 +100,6 @@ jobs:
           draft: false
           prerelease: false
 
-      # Upload APK Debug to Release
       - name: Upload APK Debug to Release
         uses: actions/upload-release-asset@v1
         env:
@@ -111,7 +110,6 @@ jobs:
           asset_name: ${{ env.playstore_name }}-${{ env.version_information }}-debug.apk
           asset_content_type: application/vnd.android.package-archive
 
-      # Upload APK Release to Release
       - name: Upload APK Release to Release
         uses: actions/upload-release-asset@v1
         env:
@@ -122,7 +120,6 @@ jobs:
           asset_name: ${{ env.playstore_name }}-${{ env.version_information }}-release.apk
           asset_content_type: application/vnd.android.package-archive
 
-      # Upload AAB to Release
       - name: Upload AAB to Release
         uses: actions/upload-release-asset@v1
         env:
