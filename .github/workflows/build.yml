@@ -43,6 +43,7 @@ jobs:
       - name: Setup JDK 19
         uses: actions/setup-java@v2
         with:
+          distribution: "zulu"
           java-version: "19"
 
       - name: Make Gradlew executable
