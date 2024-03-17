@@ -95,4 +95,32 @@ jobs:
           draft: false
           prerelease: false
 
-      # End of job
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ success() }}
+    steps:
+      - name: Download Artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: ${{ github.workflow }}
+          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - App bundle(s) AAB release generated
+          path: downloads
+
+      - name: Generate tag
+        id: generate_tag
+        run: echo "::set-output name=tag::$(date +'%Y%m%d%H%M%S')"
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Release ${{ steps.generate_tag.outputs.tag }}
+          body: Automated release
+          draft: false
+          prerelease: false
+          tag_name: ${{ steps.generate_tag.outputs.tag }}
+          files: |
+            downloads/*
