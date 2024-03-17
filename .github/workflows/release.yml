@@ -1,0 +1,37 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: "zulu"
+
+      # Build and generate release artifacts (APK, AAB, etc.)
+      # Replace with your build steps
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ github.ref_name }} # Release title
+          body: Automated release # Release body
+          draft: false
+          prerelease: false
+          files: | # Upload release artifacts
+            ${{ env.main_project_module }}/build/outputs/apk/release/*.apk
+            ${{ env.main_project_module }}/build/outputs/bundle/release/*.aab
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
