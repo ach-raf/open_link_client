@@ -9,47 +9,6 @@
     tools:context="com.openlinkclient.MainActivity">
 
 
-    <TextView
-        android:id="@+id/txt_server_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Offline"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_link"
-        app:layout_constraintVertical_bias="0.764" />
-
-    <EditText
-        android:id="@+id/txt_ip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:inputType="textPersonName"
-        android:text=""
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toTopOf="@+id/f2"
-        app:layout_constraintEnd_toStartOf="@+id/btn_turn_off_screen"
-        app:layout_constraintHorizontal_bias="0.44"
-        app:layout_constraintStart_toEndOf="@+id/esc"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/txt_link"
-        android:layout_width="264dp"
-        android:layout_height="38dp"
-        android:drawableEnd="@drawable/ic_cancel_white_24dp"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
-
     <Button
         android:id="@+id/open_link_button"
         android:layout_width="83dp"
@@ -75,7 +34,7 @@
         app:layout_constraintBottom_toTopOf="@+id/skip_anime_intro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.969"
-        app:layout_constraintStart_toEndOf="@+id/f2"
+        app:layout_constraintStart_toEndOf="@+id/sub_delay_plus"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.027" />
 
@@ -134,7 +93,8 @@
         android:background="@drawable/button_background"
         android:elevation="8dp"
         android:onClick="getCommand"
-        android:text="@string/u"
+        android:text="@string/force_subtitle_style"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/subtitle_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.272"
@@ -377,13 +337,13 @@
         app:layout_constraintVertical_bias="0.021" />
 
     <Button
-        android:id="@+id/f1"
+        android:id="@+id/sub_delay_minus"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@drawable/button_background"
         android:elevation="8dp"
         android:onClick="getCommand"
-        android:text="F1"
+        android:text="@string/sub_delay_minus"
         app:layout_constraintBottom_toTopOf="@+id/enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.054"
@@ -392,17 +352,18 @@
         app:layout_constraintVertical_bias="0.272" />
 
     <Button
-        android:id="@+id/f2"
+        android:id="@+id/sub_delay_plus"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:background="@drawable/button_background"
         android:elevation="8dp"
         android:onClick="getCommand"
-        android:text="F2"
+        android:text="@string/sub_delay_plus"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/skip_anime_intro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.023"
-        app:layout_constraintStart_toEndOf="@+id/f1"
+        app:layout_constraintStart_toEndOf="@+id/sub_delay_minus"
         app:layout_constraintTop_toBottomOf="@+id/btn_turn_off_screen"
         app:layout_constraintVertical_bias="0.25" />
 
@@ -432,7 +393,7 @@
         app:layout_constraintBottom_toTopOf="@+id/enter"
         app:layout_constraintEnd_toStartOf="@+id/btn_turn_off_screen"
         app:layout_constraintHorizontal_bias="0.394"
-        app:layout_constraintStart_toEndOf="@+id/f2"
+        app:layout_constraintStart_toEndOf="@+id/sub_delay_plus"
         app:layout_constraintTop_toBottomOf="@+id/txt_ip"
         app:layout_constraintVertical_bias="0.909" />
 
@@ -447,7 +408,7 @@
         app:layout_constraintBottom_toTopOf="@+id/skip_anime_intro"
         app:layout_constraintEnd_toStartOf="@+id/btn_turn_off_screen"
         app:layout_constraintHorizontal_bias="0.394"
-        app:layout_constraintStart_toEndOf="@+id/f2"
+        app:layout_constraintStart_toEndOf="@+id/sub_delay_plus"
         app:layout_constraintTop_toBottomOf="@+id/txt_ip"
         app:layout_constraintVertical_bias="0.875" />
 
@@ -480,5 +441,55 @@
         app:layout_constraintStart_toEndOf="@+id/enter"
         app:layout_constraintTop_toBottomOf="@+id/txt_ip"
         app:layout_constraintVertical_bias="0.909" />
+
+    <TextView
+        android:id="@+id/txt_server_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Offline"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_link"
+        app:layout_constraintVertical_bias="0.764" />
+
+    <EditText
+        android:id="@+id/txt_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:inputType="textPersonName"
+        android:text="192.168.3.5"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/sub_delay_plus"
+        app:layout_constraintEnd_toStartOf="@+id/btn_turn_off_screen"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toEndOf="@+id/esc"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/txt_link"
+        android:layout_width="264dp"
+        android:layout_height="38dp"
+        android:drawableEnd="@drawable/ic_cancel_white_24dp"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

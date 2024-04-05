@@ -29,7 +29,9 @@
     <string name="history">History</string>
     <string name="shaders">Shaders</string>
     <string name="overlay">Overlay</string>
-    <string name="u">U</string>
+    <string name="force_subtitle_style">force subs style</string>
+    <string name="sub_delay_plus">SUB +</string>
+    <string name="sub_delay_minus">- SUB</string>
 
     <string-array name="remote_controllers_list">
         <item>MPC</item>
